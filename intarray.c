@@ -135,6 +135,16 @@ int			get_index_min_from_intarray(intarray tab, int index)
 	return (index_min);
 }
 
+intarray	clone_intarray(intarray tab)
+{
+	int i;
+	intarray copy = create_intarray(tab.len);
+
+	for (i = 0; i < copy.len; i++)
+		copy.data[i] = tab.data[i];
+	return (copy);
+}
+
 void		swap_int(int* m, int* n)
 {
 	int tmp;
@@ -153,4 +163,49 @@ void		sort1_intarray(intarray tab)
 		index_min = get_index_min_from_intarray(tab, i);
 		swap_int(tab.data + index_min, tab.data + i);
 	}
+}
+
+int			sum_intarray (intarray tab)
+{
+	int sum = 0;
+	int i;
+	for (i = 0; i < tab.len; i++)	
+		sum += tab.data[i];
+	if (tab.len == 0)
+		printf ("sum_intarray : len tab = 0");
+	return (sum);
+}
+
+float		average_intarray (intarray tab)
+{
+	int sum = sum_intarray(tab);
+	if (tab.len == 0)
+	{
+		printf ("sum_intarray : len tab = 0");
+		return (-1.0);
+	}
+	return ((float)sum / tab.len);
+}
+
+float		median_intarray (intarray tab)
+{
+	intarray copy = clone_intarray(tab);
+	sort1_intarray(copy);
+	float	median;
+	
+	if (tab.len == 0)
+	{	
+		printf ("sum_intarray : len tab = 0");
+		return (-1.0);
+	}
+	if (copy.len % 2 == 0)
+	{
+		int v1 = copy.data[(copy.len - 1) / 2];
+		int v2 = copy.data[(copy.len) / 2];
+		median = ((float)(v1 + v2) / 2);
+	}	
+	else
+		median = (copy.data[(copy.len - 1) / 2]);
+	destroy_intarray(copy);
+	return (median);
 }

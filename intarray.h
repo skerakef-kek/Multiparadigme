@@ -24,5 +24,13 @@ int			get_index_min_intarray(intarray tab);
 int			get_index_min_from_intarray(intarray tab, int n);
 void		sort1_intarray(intarray tab);
 void		swap_int(int* m, int* n);
+int			sum_intarray (intarray tab);
+float		average_intarray (intarray tab);
+intarray	clone_intarray(intarray tab);
+float		median_intarray (intarray tab);
+
+int			get_max_intarray (intarray tab);
+int			get_index_max_from_intarray (intarray tab);
+int			get_index_max_intarray (intarray tab);
 
 /*	*/
