@@ -1,31 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-typedef struct _intarray
-{
-	int*	data;
-	int		len;
-}				intarray;
-
-/*			prototypes des fonctions 		*/
-intarray	create_intarray (int len);
-intarray	debug_intarray (intarray tab);
-void		print_positive_values_intarray (intarray tab);
-int			search_intarray (intarray tab, int n);
-int			nb_occurences_intarray (intarray tab, int n);
-int			get_intarray (intarray tab, int index);
-void		destroy_intarray (intarray tab);
-void		set_intarray (intarray tab, int index, int value);
-int			length_intarray (intarray tab);
-intarray	concat_intarray(intarray t1, intarray t2);
-int			get_min_intarray(intarray tab);
-int			get_index_min_intarray(intarray tab);
-int			get_index_min_from_intarray(intarray tab, int n);
-void		sort1_intarray(intarray tab);
-void		swap_intarray(int* m, int* n);
-
-/*	*/
-
+#include "intarray.h"
 
 void		destroy_intarray (intarray tab)
 {
@@ -162,7 +135,7 @@ int			get_index_min_from_intarray(intarray tab, int index)
 	return (index_min);
 }
 
-void		swap_intarray(int* m, int* n)
+void		swap_int(int* m, int* n)
 {
 	int tmp;
 
@@ -178,33 +151,6 @@ void		sort1_intarray(intarray tab)
 	for (i = 0; i <= tab.len - 2; i++)
 	{
 		index_min = get_index_min_from_intarray(tab, i);
-		swap_intarray(tab.data + index_min, tab.data + i);
+		swap_int(tab.data + index_min, tab.data + i);
 	}
-}
-
-int			main()
-{
-	intarray tab = create_intarray(10);
-	int i;
-
-	set_intarray(tab, 0, 10);
-	set_intarray(tab, 1, 14);
-	set_intarray(tab, 2, 8);
-	set_intarray(tab, 3, -52);
-	set_intarray(tab, 4, -37);
-	set_intarray(tab, 5, -214);
-	set_intarray(tab, 6, -24);
-	set_intarray(tab, 7, -224);
-	set_intarray(tab, 8, -24);
-	set_intarray(tab, 9, 5);
-	
-	debug_intarray(tab);
-
-	sort1_intarray(tab);
-
-	debug_intarray(tab);
-	
-	destroy_intarray(tab);
-
-	return (0);
 }
