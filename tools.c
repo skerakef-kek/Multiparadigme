@@ -15,6 +15,8 @@ int		safe_string_to_int (char* str, int* ok)
     int n = 0;
     *ok = 1;
 
+    if (str[0] == '-')
+        return (- safe_string_to_int (str + 1, ok));
     if (!(*str))
     {   
         *ok = 0;
@@ -30,10 +32,11 @@ int		safe_string_to_int (char* str, int* ok)
     return (n);
 }
 
-int     main()
+void		swap_int(int* m, int* n)
 {
-    char* str = "125b242";
-    int n = string_to_int(str);
-    printf ("%d\n", n);
-    return (0);
+	int tmp;
+
+	tmp = *m;
+	*m = *n;
+	*n = tmp;
 }

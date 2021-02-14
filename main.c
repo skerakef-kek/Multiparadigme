@@ -1,27 +1,29 @@
 #include "intarray.h"
+#include "tools.h"
 
-int			main()
+int			main(int argc, char** argv)
 {
-	intarray tab = create_intarray(6);
+	intarray tab = create_intarray(10);
 	int i;
+	intarray tmp = empty_create_intarray(0);
 
-	set_intarray(tab, 0, 1);
-	set_intarray(tab, 1, 2);
-	set_intarray(tab, 2, 3);
-	set_intarray(tab, 3, 4);
-	set_intarray(tab, 4, 6);
-	set_intarray(tab, 5, -2);
+	for (i = 0; i < tab->len; i++)
+		tab->data[i] = 2 * i - 1;
 	
 	debug_intarray (tab);
 	
-	printf ("Sum of value %d\n", sum_intarray(tab));
-	printf ("Average value %f\n", average_intarray(tab));
-	printf ("Median value %f\n", median_intarray(tab));
+	delete_intarray(tab, 0);	
+
+	add_intarray(tab, 20);
+
 
 
 	debug_intarray (tab);
 
+	printf ("TMP = ");
+	debug_intarray(tmp);
+
+	destroy_intarray (tmp);
 	destroy_intarray(tab);
-
 	return (0);
 }
