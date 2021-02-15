@@ -11,7 +11,7 @@ void	aux_create_intarray (intarray tab)
 	int i;
 	if (tab->alloc <= 0)
 	{
-		tab->alloc = 20;
+		tab->alloc = 4;
 		printf ("aux_create_intarray : taille allouee <= 0 \n");
 		printf ("nous allouons %d a la place\n", tab->alloc);
 	}
@@ -30,7 +30,7 @@ intarray		create_intarray(int len)
 	return (tab);
 }
 
-intarray	empty_create_intarray(int alloc)
+intarray	create_empty_intarray(int alloc)
 {
 	intarray tab = malloc (sizeof(s_intarray));
 	tab->len = 0;
@@ -50,6 +50,11 @@ intarray	debug_intarray(intarray tab)
 	printf(" ]\n");
 }
 
+intarray	ext_debug_intarray (intarray tab)
+{
+	printf ("tab. alloc = %d ; tab. len = %d\n\n", tab->alloc, tab->len);
+	debug_intarray (tab);
+}
 void		print_positive_values_intarray (intarray tab)
 {
 	int i;
@@ -283,14 +288,55 @@ void		delete_intarray(intarray tab, int index)
 		tab->data[i - 1] = tab->data[i];
 	tab->len--;
 }
+void		resize_intarray (intarray tab, int newalloc)
+{
+	int* newdata = malloc (sizeof (int) * newalloc);
+	int i;
+
+	for (i = 0; i < tab->len; i++)
+		newdata[i] = tab->data[i];
+	free (tab->data);
+	tab->data = newdata;
+	tab->alloc = newalloc;
+}
+
+void		ext_set_intarray (intarray tab, int index, int value)
+{
+	int i;
+
+	printf ("Added value %d to case number %d : ", value, index);
+	if (index < 0)
+	{
+		printf ("ext_set_intarray : index negative");
+		return;
+	}
+	if (index < tab->len)
+	{
+		tab->data[index] = value;
+		ext_debug_intarray(tab);
+		return;
+	}
+	if (index >= tab->alloc)
+		resize_intarray (tab, 1 + 2 * index);
+	for (i = tab->len; i < index ; i++)
+		tab->data[i] = 0;
+	tab->data[index] = value;
+	if (index >= tab->len)
+		tab->len = index + 1;
+	ext_debug_intarray(tab);
+
+}
 
 void		add_intarray(intarray tab, int value)
 {
-	if (tab->len >= tab->alloc)
-	{
-		printf("add_intarray : ");
-		return;
-	}
-	tab->data[tab->len] = value;
-	tab->len++;
+	ext_set_intarray(tab, tab->len, value);
 }
+
+
+
+/*	
+	0 1 2 3 4 5 6 7    				tab->len = 5
+	4 5 2 2 5 . . .	. .				tab->alloc = 8
+
+	ext_set_intarray(tab, 9, 10);
+*/

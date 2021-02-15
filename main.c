@@ -3,27 +3,14 @@
 
 int			main(int argc, char** argv)
 {
-	intarray tab = create_intarray(10);
+	intarray tab = create_intarray(0);
 	int i;
-	intarray tmp = empty_create_intarray(0);
 
-	for (i = 0; i < tab->len; i++)
-		tab->data[i] = 2 * i - 1;
+	ext_debug_intarray (tab);
 	
-	debug_intarray (tab);
-	
-	delete_intarray(tab, 0);	
+	for (i = 0; i < 10; i++)
+		add_intarray(tab, 1 + i);
 
-	add_intarray(tab, 20);
-
-
-
-	debug_intarray (tab);
-
-	printf ("TMP = ");
-	debug_intarray(tmp);
-
-	destroy_intarray (tmp);
 	destroy_intarray(tab);
 	return (0);
 }
