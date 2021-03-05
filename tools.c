@@ -1,5 +1,14 @@
 #include "tools.h"
 
+int     ft_strlen(char *str)
+{
+    int i = 0;
+    
+    while (str[i])
+        i++;
+    return (i);    
+}
+
 int     string_to_int (char* str)
 {
     int ok;
@@ -39,4 +48,13 @@ void		swap_int(int* m, int* n)
 	tmp = *m;
 	*m = *n;
 	*n = tmp;
+}
+
+void		swap_char(char* m, char* n)
+{
+    char tmp;
+
+    tmp = *m;
+    *m = *n;
+    *n = tmp;  
 }

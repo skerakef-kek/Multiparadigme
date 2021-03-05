@@ -6,7 +6,7 @@
 
 int main (int ac, char** av)
 {
-    intarray tab = create_empty_intarray(ac - 1);
+    intarray tab = empty_create_intarray(ac - 1);
     int i;
 
     for (i = 1; i < ac; i++)

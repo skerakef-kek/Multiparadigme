@@ -5,6 +5,10 @@ void		destroy_intarray (intarray tab)
 	free (tab->data);
 	free (tab);
 }
+intarray	standard_empty_create_intarray(void)
+{
+	return (empty_create_intarray(INTARRAY_ALLOC));
+}
 
 void	aux_create_intarray (intarray tab)
 {
@@ -30,7 +34,7 @@ intarray		create_intarray(int len)
 	return (tab);
 }
 
-intarray	create_empty_intarray(int alloc)
+intarray	empty_create_intarray(int alloc)
 {
 	intarray tab = malloc (sizeof(s_intarray));
 	tab->len = 0;
@@ -39,7 +43,7 @@ intarray	create_empty_intarray(int alloc)
 	return (tab);
 }
 
-intarray	debug_intarray(intarray tab) 
+void		debug_intarray(intarray tab) 
 {
 	int i;
 	printf("[ ");
@@ -50,7 +54,7 @@ intarray	debug_intarray(intarray tab)
 	printf(" ]\n");
 }
 
-intarray	ext_debug_intarray (intarray tab)
+void		ext_debug_intarray (intarray tab)
 {
 	printf ("tab. alloc = %d ; tab. len = %d\n\n", tab->alloc, tab->len);
 	debug_intarray (tab);
@@ -304,7 +308,7 @@ void		ext_set_intarray (intarray tab, int index, int value)
 {
 	int i;
 
-	printf ("Added value %d to case number %d : ", value, index);
+	printf ("Added value %d to case number %d ;\n", value, index);
 	if (index < 0)
 	{
 		printf ("ext_set_intarray : index negative");
@@ -313,7 +317,6 @@ void		ext_set_intarray (intarray tab, int index, int value)
 	if (index < tab->len)
 	{
 		tab->data[index] = value;
-		ext_debug_intarray(tab);
 		return;
 	}
 	if (index >= tab->alloc)
@@ -323,7 +326,6 @@ void		ext_set_intarray (intarray tab, int index, int value)
 	tab->data[index] = value;
 	if (index >= tab->len)
 		tab->len = index + 1;
-	ext_debug_intarray(tab);
 
 }
 

@@ -1,7 +1,10 @@
+#ifndef __INTARRAY_H__
+#define __INTARRAY_H__
 #include <stdio.h>
 #include <stdlib.h>
 #include "tools.h"
 
+#define INTARRAY_ALLOC 4
 /* "semantique par reference uniforme" */
 typedef struct _intarray*	intarray;
 typedef struct _intarray	s_intarray;
@@ -14,9 +17,10 @@ struct _intarray	{
 
 /*			prototypes des fonctions 		*/
 intarray	create_intarray (int len);
-intarray	create_empty_intarray(int alloc);
-intarray	debug_intarray (intarray tab);
-intarray	ext_debug_intarray (intarray tab);
+intarray	empty_create_intarray(int alloc);
+intarray	standard_empty_create_intarray(void);
+void		debug_intarray (intarray tab);
+void		ext_debug_intarray (intarray tab);
 void		print_positive_values_intarray (intarray tab);
 int			search_intarray (intarray tab, int n);
 int			nb_occurences_intarray (intarray tab, int n);
@@ -44,3 +48,4 @@ void		ext_set_intarray (intarray tab, int index, int value);
 void		resize_intarray (intarray tab, int newalloc);
 
 /*	*/
+#endif

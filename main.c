@@ -1,16 +1,19 @@
 #include "intarray.h"
 #include "tools.h"
+#include "jstr.h"
 
 int			main(int argc, char** argv)
 {
-	intarray tab = create_intarray(0);
+	jstr j = standard_empty_create_jstr();
+
 	int i;
-
-	ext_debug_intarray (tab);
-	
-	for (i = 0; i < 10; i++)
-		add_intarray(tab, 1 + i);
-
-	destroy_intarray(tab);
+	for (i = 1; i < argc; i++)
+	{
+		jstr tmp = regstr_to_jstr(argv[i]);
+		d_concat_jstr(j , tmp);
+		destroy_jstr(tmp);
+	}
+	ext_debug_jstr(j);
+	destroy_jstr(j);
 	return (0);
 }
